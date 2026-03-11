@@ -1,48 +1,40 @@
-# movie-search-app
+# Movie Search App
 
-This template should help get you started developing with Vue 3 in Vite.
+A movie search app built with Vue 3 and TypeScript, powered by the TMDB API. Browse trending movies, search by title, view details, and save favorites.
 
-## Recommended IDE Setup
+**Live demo:** https://movie-search-app-iota-five.vercel.app/
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+---
 
-## Recommended Browser Setup
+## Features
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- Real-time search with debouncing
+- Trending movies on load
+- Movie detail pages with genres, runtime, rating, and tagline
+- Add/remove favorites with localStorage persistence
+- Animated loading skeletons
+- Pagination
+- Fully responsive
 
-## Type Support for `.vue` Imports in TS
+---
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+## Tech Stack
 
-## Customize configuration
+- Vue 3 — Composition API, `<script setup>`, composables, Vue Router, Pinia
+- TypeScript — strict mode, interfaces, generics, typed error classes
+- SCSS — variables, nesting, mixins, responsive breakpoints
+- Vite — build tool and dev server
+- VueUse — `watchDebounced`
+- TMDB API — movie data
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## What I Learned
 
-```sh
-npm install
-```
+This was my first project with Vue and TypeScript. A few things that stood out:
 
-### Compile and Hot-Reload for Development
+**Composables** — pulling logic out of components into reusable functions (`useMovies`, `useMovieDetail`) made the codebase noticeably cleaner. Components ended up focused purely on the template, which made them easier to reason about.
 
-```sh
-npm run dev
-```
+**TypeScript with Vue** — typing API responses with interfaces caught several bugs early. The combination of `ref<Movie[]>` and strict mode meant the compiler flagged issues I would have otherwise found at runtime.
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+**Vue's reactivity system** — coming from vanilla JS, the shift to just updating data and letting the UI handle itself took some getting used to, but once it clicked it felt like the right way to build UIs.

@@ -1,0 +1,50 @@
+// Colors
+$bg-primary: #0f0f1a;
+$bg-secondary: #1a1a2e;
+$bg-card: #1a1a2e;
+$accent: #6c63ff;
+$accent-hover: #574fd6;
+$text-primary: #ffffff;
+$text-secondary: #aaaaaa;
+$text-muted: #888888;
+$error: #ff6b6b;
+$border: #2a2a4a;
+$border-muted: #444444;
+
+// Spacing
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 24px;
+$radius-full: 50%;
+
+// Typography
+$font-size-sm: 12px;
+$font-size-md: 14px;
+$font-size-lg: 16px;
+$font-size-xl: 20px;
+$font-size-2xl: 28px;
+$font-size-3xl: 36px;
+
+// Breakpoints
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+
+// Mixins
+@mixin screenSize480 {
+  @media (max-width: $breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin screenSize768 {
+  @media (max-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin screenSize1024 {
+  @media (max-width: $breakpoint-lg) {
+    @content;
+  }
+}

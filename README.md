@@ -38,5 +38,3 @@ This was my first project with Vue and TypeScript. A few things that stood out:
 **TypeScript with Vue** — typing API responses with interfaces caught several bugs early. The combination of `ref<Movie[]>` and strict mode meant the compiler flagged issues I would have otherwise found at runtime.
 
 **Vue's reactivity system** — coming from vanilla JS, the shift to just updating data and letting the UI handle itself took some getting used to, but once it clicked it felt like the right way to build UIs.
-
-test

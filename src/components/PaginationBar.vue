@@ -41,91 +41,101 @@ function getPages(): (number | '...')[] {
 </script>
 
 <template>
-  <div class="pagination" v-if="totalPages > 1">
+  <nav class="pagination" v-if="totalPages > 1" aria-label="Pagination">
     <button
       class="page-btn arrow"
       :disabled="currentPage === 1"
       @click="emit('page-change', currentPage - 1)"
     >
-      ←
+      ← Prev
     </button>
-    <template v-for="page in getPages()" :key="page">
-      <span v-if="page === '...'" class="ellipsis">...</span>
-      <button
-        v-else
-        class="page-btn"
-        :class="{ active: page === currentPage }"
-        @click="emit('page-change', page)"
-      >
-        {{ page }}
-      </button>
-    </template>
+    <div class="pages">
+      <template v-for="(page, i) in getPages()" :key="`${page}-${i}`">
+        <span v-if="page === '...'" class="ellipsis">…</span>
+        <button
+          v-else
+          class="page-btn"
+          :class="{ active: page === currentPage }"
+          :aria-current="page === currentPage ? 'page' : undefined"
+          @click="emit('page-change', page)"
+        >
+          {{ String(page).padStart(2, '0') }}
+        </button>
+      </template>
+    </div>
     <button
       class="page-btn arrow"
       :disabled="currentPage === Math.min(totalPages, 500)"
       @click="emit('page-change', currentPage + 1)"
     >
-      →
+      Next →
     </button>
-  </div>
+  </nav>
 </template>
 
 <style scoped lang="scss">
 .pagination {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 6px;
-  padding: 32px 0;
-  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid $border-muted;
 
   @include screenSize480 {
-    gap: 4px;
-    padding: 24px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  @include screenSize480 {
+    order: -1;
+    width: 100%;
+    justify-content: center;
   }
 }
 
 .page-btn {
-  min-width: 36px;
-  height: 36px;
-  padding: 0 8px;
-  border-radius: $radius-sm;
-  border: 1px solid $border-muted;
-  background: transparent;
+  @include label;
+  min-width: 34px;
+  padding: 8px 6px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: none;
   color: $text-secondary;
-  font-size: $font-size-md;
   cursor: pointer;
-  transition: all 0.2s;
-
-  @include screenSize480 {
-    min-width: 30px;
-    height: 30px;
-    font-size: $font-size-sm;
-  }
+  transition:
+    color 0.15s,
+    border-color 0.15s;
 
   &:hover:not(:disabled) {
-    border-color: $accent;
     color: $text-primary;
   }
 
   &.active {
-    background: $accent;
-    border-color: $accent;
-    color: $text-primary;
-    font-weight: 600;
+    color: $accent;
+    border-bottom-color: $accent;
   }
 
   &:disabled {
-    opacity: 0.3;
+    color: $text-muted;
+    opacity: 0.5;
     cursor: not-allowed;
   }
 
   &.arrow {
-    font-size: $font-size-lg;
+    padding: 8px 0;
   }
 }
 
 .ellipsis {
+  @include label;
   color: $text-muted;
   padding: 0 4px;
   user-select: none;

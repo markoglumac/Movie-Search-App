@@ -6,115 +6,65 @@ const router = useRouter()
 
 <template>
   <main class="not-found">
-    <div class="content">
-      <h1 class="code">404</h1>
-      <p class="title">Page not found</p>
-      <p class="subtitle">The page you're looking for doesn't exist or has been moved.</p>
-      <div class="actions">
-        <button class="btn-primary" @click="router.push('/')">Go Home</button>
-        <button class="btn-secondary" @click="router.back()">Go Back</button>
-      </div>
+    <p class="kicker">Error 404</p>
+    <h1 class="code">Reel<br /><em>missing.</em></h1>
+    <p class="subtitle">This page was cut in the edit, or it never made it to the final print.</p>
+    <div class="actions">
+      <button class="btn-primary" @click="router.push('/')">Go home</button>
+      <button class="btn-secondary" @click="router.back()">← Go back</button>
     </div>
   </main>
 </template>
 
 <style scoped lang="scss">
 .not-found {
-  min-height: 100vh;
-  background: $bg-primary;
-  color: $text-primary;
+  @include container;
+  min-height: 70vh;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  text-align: center;
-  padding: 24px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
 
-  .content {
-    .code {
-      font-size: 120px;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, $accent, #a89fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+.kicker {
+  @include label;
+  color: $accent;
+  margin-bottom: 20px;
+}
 
-      @include screenSize480 {
-        font-size: 80px;
-      }
-    }
+.code {
+  font-family: $font-display;
+  font-size: clamp(64px, 13vw, 160px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  font-variation-settings: 'opsz' 144;
+  margin-bottom: 32px;
 
-    .title {
-      font-size: $font-size-2xl;
-      font-weight: 800;
-      margin-bottom: 12px;
-
-      @include screenSize480 {
-        font-size: $font-size-xl;
-      }
-    }
-
-    .subtitle {
-      color: $text-secondary;
-      font-size: $font-size-lg;
-      margin-bottom: 40px;
-
-      @include screenSize480 {
-        font-size: $font-size-md;
-        margin-bottom: 28px;
-      }
-    }
-
-    .actions {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-
-      @include screenSize480 {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    .btn-primary {
-      background: $accent;
-      border: none;
-      color: $text-primary;
-      padding: 12px 28px;
-      border-radius: $radius-lg;
-      font-size: $font-size-md;
-      cursor: pointer;
-      transition: background 0.2s;
-
-      &:hover {
-        background: $accent-hover;
-      }
-
-      @include screenSize480 {
-        width: 100%;
-      }
-    }
-
-    .btn-secondary {
-      background: transparent;
-      border: 1px solid $border-muted;
-      color: $text-secondary;
-      padding: 12px 28px;
-      border-radius: $radius-lg;
-      font-size: $font-size-md;
-      cursor: pointer;
-      transition: all 0.2s;
-
-      &:hover {
-        border-color: $text-primary;
-        color: $text-primary;
-      }
-
-      @include screenSize480 {
-        width: 100%;
-      }
-    }
+  em {
+    color: $accent;
   }
+}
+
+.subtitle {
+  max-width: 44ch;
+  font-size: $font-size-xl;
+  color: $text-secondary;
+  margin-bottom: 40px;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  @include button-solid;
+}
+
+.btn-secondary {
+  @include button-outline;
 }
 </style>

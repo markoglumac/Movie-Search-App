@@ -1,52 +1,113 @@
 <script setup lang="ts">
 import { RouterView, RouterLink } from 'vue-router'
+import { useFavoritesStore } from '@/stores/favorites'
+
+const favoritesStore = useFavoritesStore()
 </script>
 
 <template>
-  <nav class="navbar">
-    <RouterLink to="/" class="nav-brand">🎬 MovieSearch</RouterLink>
-    <RouterLink to="/favorites" class="nav-link">❤️ Favorites</RouterLink>
-  </nav>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <RouterLink to="/" class="brand">Movie<em>Search</em></RouterLink>
+      <nav class="nav">
+        <RouterLink to="/" class="nav-link">Index</RouterLink>
+        <RouterLink to="/favorites" class="nav-link">
+          Favorites <span class="count">{{ String(favoritesStore.count).padStart(2, '0') }}</span>
+        </RouterLink>
+      </nav>
+    </div>
+  </header>
   <RouterView />
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>Data from TMDB</span>
+      <span>Marko Glumac</span>
+    </div>
+  </footer>
 </template>
 
 <style scoped lang="scss">
-.navbar {
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba($bg-primary, 0.92);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid $border;
+}
+
+.masthead-inner {
+  @include container;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  background: $bg-secondary;
-  border-bottom: 1px solid $border;
+  align-items: baseline;
+  padding-top: 18px;
+  padding-bottom: 14px;
+}
+
+.brand {
+  font-family: $font-display;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  color: $text-primary;
+
+  em {
+    font-weight: 400;
+    color: $accent;
+  }
 
   @include screenSize480 {
-    padding: 12px 16px;
+    font-size: 22px;
   }
+}
 
-  .nav-brand {
-    font-size: $font-size-xl;
-    font-weight: 800;
+.nav {
+  display: flex;
+  gap: 28px;
+
+  @include screenSize480 {
+    gap: 16px;
+  }
+}
+
+.nav-link {
+  @include label;
+  color: $text-secondary;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+
+  &:hover {
     color: $text-primary;
-    text-decoration: none;
-
-    @include screenSize480 {
-      font-size: $font-size-lg;
-    }
   }
 
-  .nav-link {
-    color: $text-secondary;
-    text-decoration: none;
-    font-size: 15px;
-    transition: color 0.2s;
-
-    @include screenSize480 {
-      font-size: $font-size-sm;
-    }
-
-    &:hover {
-      color: $text-primary;
-    }
+  &.router-link-exact-active {
+    color: $text-primary;
+    border-bottom-color: $accent;
   }
+
+  .count {
+    color: $accent;
+  }
+}
+
+.footer {
+  border-top: 1px solid $border;
+  margin-top: 64px;
+}
+
+.footer-inner {
+  @include container;
+  @include label;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 28px;
+  color: $text-muted;
 }
 </style>

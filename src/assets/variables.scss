@@ -1,29 +1,37 @@
-// Colors
-$bg-primary: #0f0f1a;
-$bg-secondary: #1a1a2e;
-$bg-card: #1a1a2e;
-$accent: #6c63ff;
-$accent-hover: #574fd6;
-$text-primary: #ffffff;
-$text-secondary: #aaaaaa;
-$text-muted: #888888;
-$error: #ff6b6b;
-$border: #2a2a4a;
-$border-muted: #444444;
-
-// Spacing
-$radius-sm: 8px;
-$radius-md: 12px;
-$radius-lg: 24px;
-$radius-full: 50%;
+// Colors — warm "projection booth" palette: off-black, cream paper, one vermilion accent
+$bg-primary: #12100e;
+$bg-secondary: #1b1815;
+$bg-card: #1b1815;
+$accent: #e4572e;
+$accent-hover: #f06a41;
+$text-primary: #ede4d3;
+$text-secondary: #a89f90;
+$text-muted: #6f675c;
+$error: #e4572e;
+$border: #2c2823;
+$border-muted: #3d3730;
 
 // Typography
+$font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+$font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+$font-size-xs: 11px;
 $font-size-sm: 12px;
 $font-size-md: 14px;
 $font-size-lg: 16px;
 $font-size-xl: 20px;
 $font-size-2xl: 28px;
 $font-size-3xl: 36px;
+
+// Shape
+$radius-sm: 2px;
+$radius-md: 2px;
+$radius-lg: 2px;
+$radius-full: 50%;
+
+// Layout
+$content-width: 1200px;
+$gutter: 24px;
 
 // Breakpoints
 $breakpoint-sm: 480px;
@@ -46,5 +54,62 @@ $breakpoint-lg: 1024px;
 @mixin screenSize1024 {
   @media (max-width: $breakpoint-lg) {
     @content;
+  }
+}
+
+// Small uppercase monospace label used for metadata, nav and buttons
+@mixin label {
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@mixin container {
+  max-width: $content-width;
+  margin: 0 auto;
+  padding-left: $gutter;
+  padding-right: $gutter;
+
+  @include screenSize480 {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+// Bordered rectangular button
+@mixin button-outline {
+  @include label;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border: 1px solid $border-muted;
+  border-radius: $radius-sm;
+  background: transparent;
+  color: $text-primary;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    border-color 0.15s,
+    background 0.15s,
+    color 0.15s;
+
+  &:hover {
+    border-color: $text-primary;
+  }
+}
+
+@mixin button-solid {
+  @include button-outline;
+  background: $accent;
+  border-color: $accent;
+  color: $bg-primary;
+
+  &:hover {
+    background: $accent-hover;
+    border-color: $accent-hover;
   }
 }

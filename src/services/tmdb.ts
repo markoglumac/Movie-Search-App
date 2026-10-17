@@ -17,6 +17,7 @@ export interface Movie {
 export interface MovieDetail extends Movie {
   genres: { id: number; name: string }[]
   runtime: number | null
+  backdrop_path: string | null
   tagline: string
   status: string
 }
@@ -48,6 +49,11 @@ async function fetchFromApi<T>(endpoint: string): Promise<T> {
 export function getPosterUrl(path: string | null): string {
   if (!path) return '/no-poster.png'
   return `https://image.tmdb.org/t/p/w500${path}`
+}
+
+export function getBackdropUrl(path: string | null): string | null {
+  if (!path) return null
+  return `https://image.tmdb.org/t/p/w1280${path}`
 }
 
 // --- API calls ---

@@ -7,9 +7,7 @@ export const useFavoritesStore = defineStore('favorites', () => {
   const favorites = ref<Movie[]>(loadFromStorage())
 
   // --- Getters ---
-  const count = computed(() => {
-    favorites.value.length
-  })
+  const count = computed(() => favorites.value.length)
 
   function isFavorite(id: number): boolean {
     return favorites.value.some((m) => m.id === id)
